@@ -34,9 +34,9 @@ public class HomePage {
             stmt = conn.createStatement();
            // System.out.println("Connected to the database");
             ResultSet rs = stmt.executeQuery(query);
-            //rs.last();
-            //count=rs.getRow();
-            //System.out.println("Number of rows:"+count);
+            rs.last();
+            count=rs.getRow();
+            System.out.println("Number of rows:"+count);
             while (rs.next())
             {
                 System.out.println(rs.getString(1));
