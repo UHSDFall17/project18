@@ -6,7 +6,8 @@ public class Testcase1 extends TestCase {
      public void test1()
      {
     	 HomePage hp=new HomePage();
-    	 hp.searchevent();
+    	 int noofrows=hp.searchevent();
+    	 assertEquals(2,noofrows);
     	 
     	 
      }

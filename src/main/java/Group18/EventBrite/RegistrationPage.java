@@ -5,12 +5,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
 public class RegistrationPage {
-	public static void main(String args[])
-    {
-   	  
-    }
-	public static void register()
-	{
+	public static String register()
+	{       
+		    String S1="NULL";
 		    Scanner sc=new Scanner(System.in);
 		    System.out.println("Enter First Name");
 	        String Firstname=sc.next();
@@ -36,14 +33,14 @@ public class RegistrationPage {
  	            conn = DriverManager.getConnection(url, userName, password);
  	            stmt = conn.createStatement();
 	           String query="insert into LoginUsers values ('"+Firstname+"','"+Lastname+"','"+EmailID+"',"+Phoneno+",'"+Password+"','"+Pass+"')";
- 	           //String query="insert into LoginUsers values ('ravali','basna','ravali@gmail.com','12345678','munni','munni')";
  	            int rs=stmt.executeUpdate(query);
+ 	            S1="Registration Successfull";
  	        }
 	        catch (Exception e)
  	        {
  	            e.printStackTrace();
  	        }
- 	       
-	        
+ 	      
+	       return S1; 
 	}
 }

@@ -16,8 +16,9 @@ public class HomePage {
 		  default: System.out.println("Enter correct choice:");        
 		}
 	}
-	public static void searchevent()
+	public static int searchevent()
 	{
+		int count=0;
 		Scanner sc = new Scanner(System.in);
 		Connection conn = null;
         String url = "jdbc:mysql://localhost:3306/eventbrite?useSSL=false";
@@ -33,21 +34,26 @@ public class HomePage {
             stmt = conn.createStatement();
            // System.out.println("Connected to the database");
             ResultSet rs = stmt.executeQuery(query);
+            //rs.last();
+            //count=rs.getRow();
+            //System.out.println("Number of rows:"+count);
             while (rs.next())
             {
                 System.out.println(rs.getString(1));
                 System.out.println(rs.getString(2));
-                LoginPage LP=new LoginPage();
+                
+            }    LoginPage LP=new LoginPage();
                 System.out.println("Enter selected event ID:");
                 int selectevent=sc.nextInt();
                 LP.loginpagefunction("Ticket Booking",selectevent);
-            }
+            
             conn.close();
             //System.out.println("Disconnected from database");
         } catch (Exception e)
         {
             e.printStackTrace();
         }
+        return count;
 	}
 	
 

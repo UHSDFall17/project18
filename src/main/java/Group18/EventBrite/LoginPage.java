@@ -5,9 +5,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
 public class LoginPage {
-    public static void loginpagefunction(String choice,int id)
+    public static String loginpagefunction(String choice,int id)
     {
     	int noofavailable;
+    	String S1="NULL";
     	 Scanner sc=new Scanner(System.in);
 	        Connection conn = null;
 	        String url = "jdbc:mysql://localhost:3306/eventbrite?useSSL=false";
@@ -32,8 +33,8 @@ public class LoginPage {
     	 	           // System.out.println("Connected to the database");
     	 	            ResultSet rs = stmt.executeQuery(query);
     	 	            if(rs.next())
-    	 	            {
-    	 	               if(choice=="Ticket Booking")
+    	 	            {          
+    	 	               if(choice.equals("Ticket Booking"))
     	 	               {
     	 	            	   String query1="select * from Event where EventID='"+id+"'";
     	 	            	   ResultSet rs1=stmt.executeQuery(query1);
@@ -56,20 +57,22 @@ public class LoginPage {
    	 	                       
     	 	            	      String query2="update Event SET NoofTickets='"+noofavailable+"' where EventID='"+id+"'";
     	 	            	      int rs2=stmt.executeUpdate(query2);
+    	 	            	      S1="Ticket Booked";
     	 	            	      
-    	 	            	       
     	 	                     }
     	 	            	   }
     	 	            	       
     	 	                
     	 	               }
-    	 	               else if(choice=="Create an event")
+    	 	               else if(choice.equals("Create an event"))
     	 	               {
-    	 	            	   //direct to creating an event page
+    	 	            	   S1="Event Created";//direct to creating an event page
     	 	               }
     	 	               else
     	 	               {
+    	 	            	  S1="Wrong Selection"; 
     	 	               }   //Wrong user credentials
+    	 	                 
     	 	            }
     	 	            //System.out.println("Disconnected from database");
     	 	         
@@ -90,6 +93,7 @@ public class LoginPage {
     	 	        	        	String pass=sc.next();
     	 	        	        	String query4="update LoginUsers SET Password='"+pass+"',ConfirmPassword='"+pass+"' where PhoneNo='"+pno+"'";
     	 	        	        	int rs4=stmt.executeUpdate(query4);
+    	 	        	        	S1="Password Updated";
     	 	        	        }
     	 	        	        else
     	 	        	        {
@@ -97,13 +101,19 @@ public class LoginPage {
     	 	        	        	System.out.println("Register:");
     	 	        	        	RegistrationPage rp=new RegistrationPage();
     	 	       	 	            rp.register();
+    	 	       	 	            S1="New Registration as user not found";
     	 	        	        }   
     	 	        	        break;
+ 
     	 	        	case 2: RegistrationPage rp=new RegistrationPage();
-	       	 	            rp.register();   
-	       	 	               break;
+	       	 	            rp.register();
+	       	 	            S1="New Registration is selected";
+	       	 	            break;
+	       	 	               
 	       	 	        default: System.out.println("Time out");  
+	       	 	                 S1="Time out";
 	       	 	                 break;
+	       	 	               
     	 	        	}
     	 	        } 	
     	 	        }	
@@ -113,11 +123,14 @@ public class LoginPage {
     	 	        }
     	 	        break;
     	 	case 2: RegistrationPage rp=new RegistrationPage();
-    	 	        rp.register();
+    	 	        S1=rp.register();
     	 	        break;
-    	 	default:System.out.println("Time out");        	        
-    	 
+    	 	        
+    	 	default:System.out.println("Time out"); 
+    	 	        S1="Time out";
+    	            break;
     	 }
+    	 return S1;
     }    
      }
 
