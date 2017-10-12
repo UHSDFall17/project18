@@ -1,11 +1,14 @@
 package Group18.EventBrite;
+
 import java.sql.*;
+
 public class CreateEvent {
-	int EventID,Pincode,NoofTickets;
-	String EventName,StreetAddress,City,State;
+
+	int EventID, Pincode, NoofTickets;
+	String EventName, StreetAddress, City, State;
 	Date DateoftheEvent;
-	
-       public int getEventID() {
+
+	public int getEventID() {
 		return EventID;
 	}
 
@@ -69,8 +72,6 @@ public class CreateEvent {
 		DateoftheEvent = dateoftheEvent;
 	}
 
-	public static void main(String args[])
-       {
-    	   
-       }
+	public static void main(String args[]) {
+	}
 }
