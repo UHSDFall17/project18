@@ -16,7 +16,7 @@ public class SqlStuff {
 	private static Connection connection = null;
 	private static boolean isConnected = tryToConnect();
 
-	private static boolean tryToConnect() {
+	public static boolean tryToConnect() {
 
 		try {
 			Class.forName(DRIVER);

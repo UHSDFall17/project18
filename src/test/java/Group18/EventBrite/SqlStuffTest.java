@@ -25,6 +25,36 @@ public class SqlStuffTest extends TestCase {
 	}
 
 	@Test
+	public void testWhetherTryToConnectThrowsClassNotFoundException() throws ClassNotFoundException {
+
+		System.out.println("tryToConnect() should not throw a ClassNotFoundException");
+
+		SqlStuff.tryToConnect();
+
+	}
+
+	@Test
+	public void testWhetherTryToConnectThrowsSQLException() throws SQLException {
+
+		System.out.println("tryToConnect() should not throw an SQLException");
+
+		SqlStuff.tryToConnect();
+
+	}
+
+	@Test
+	public void testWhetherTryToConnectReturnsTrue() {
+
+		System.out.println("tryToConnect() should return true");
+
+		boolean expected = true;
+		boolean actual = SqlStuff.tryToConnect();
+
+		assertEquals(expected, actual);
+
+	}
+
+	@Test
 	public void testWhetherQueryReturnsNull() {
 
 		System.out.println("query() should not return null");
@@ -42,7 +72,7 @@ public class SqlStuffTest extends TestCase {
 
 		System.out.println("query() should not throw an SQLException");
 
-		ResultSet actual = SqlStuff.query("SELECT * FROM Event");
+		SqlStuff.query("SELECT * FROM Event");
 
 	}
 }
