@@ -1,9 +1,6 @@
 package sd;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import Group18.Eventbrite.Database;
 import java.util.*;
 
 public class RegistrationPage {
@@ -24,16 +21,7 @@ public class RegistrationPage {
 		String Password = sc.next();
 		System.out.println("Please Confirm the password:");
 		String Pass = sc.next();
-		Connection conn = null;
-		String url = "jdbc:mysql://localhost:3306/eventbrite?useSSL=false";
-		String driver = "com.mysql.jdbc.Driver";
-		String userName = "root";
-		String password = "Munni@29041995";
-		Statement stmt = null;
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, userName, password);
-			stmt = conn.createStatement();
 			if (x == 0) {
 				System.out.println("Enter company name:");
 				String comname = sc.next();
@@ -41,7 +29,7 @@ public class RegistrationPage {
 			} else {
 				query = "insert into LoginUsers values ('" + Firstname + "','" + Lastname + "','" + EmailID + "'," + Phoneno + ",'" + Password + "','" + Pass + "')";
 			}
-			int rs = stmt.executeUpdate(query);
+			Database.update(query);
 			S1 = "Registration Successfull";
 		} catch (Exception e) {
 			e.printStackTrace();

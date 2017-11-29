@@ -1,22 +1,14 @@
 package sd;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import Group18.Eventbrite.Database;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.Scanner;
+import java.util.*;
 
 public class CLoginPage {
 
 	public static String corporateloginpage() {
 		String S1 = "NULL";
 		Scanner sc = new Scanner(System.in);
-		Connection conn = null;
-		String url = "jdbc:mysql://localhost:3306/eventbrite?useSSL=false";
-		String driver = "com.mysql.jdbc.Driver";
-		String userName = "root";
-		String password = "Munni@29041995";
-		Statement stmt = null;
 		System.out.println("Enter 1: Already existed Corporate User \n 2: New Corporate User");
 		int loginselection = sc.nextInt();
 		switch (loginselection) {
@@ -27,11 +19,7 @@ public class CLoginPage {
 				String Password1 = sc.next();
 				String query = "select EmailID,Password from CorporateLoginUsers where EmailId='" + Username + "' and Password='" + Password1 + "' ";
 				try {
-					Class.forName(driver);
-					conn = DriverManager.getConnection(url, userName, password);
-					stmt = conn.createStatement();
-					// System.out.println("Connected to the database");
-					ResultSet rs = stmt.executeQuery(query);
+					ResultSet rs = Database.query(query);
 					if (rs.next()) {
 						CreateEvent ce = new CreateEvent();
 						ce.createevent();
@@ -45,12 +33,12 @@ public class CLoginPage {
 								System.out.println("Enter phone number for validation:");
 								int pno = sc.nextInt();
 								String query3 = "select * from CorporateLoginUsers where PhoneNo='" + pno + "'";
-								ResultSet rs3 = stmt.executeQuery(query3);
+								ResultSet rs3 = Database.query(query3);
 								if (rs3.next()) {
 									System.out.println("Enter New Password:");
 									String pass = sc.next();
 									String query4 = "update CorporateLoginUsers SET Password='" + pass + "',ConfirmPassword='" + pass + "' where PhoneNo='" + pno + "'";
-									int rs4 = stmt.executeUpdate(query4);
+									Database.update(query4);
 									S1 = "Password Updated";
 								} else {
 									System.out.println("CorporateUser not found:");

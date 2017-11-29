@@ -1,9 +1,6 @@
 package sd;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import Group18.Eventbrite.Database;
 import java.util.*;
 
 public class CreateEvent {
@@ -26,18 +23,9 @@ public class CreateEvent {
 		String location = sc.next();
 		System.out.println("Number of tickets available for the event:");
 		int no = sc.nextInt();
-		Connection conn = null;
-		String url = "jdbc:mysql://localhost:3306/eventbrite?useSSL=false";
-		String driver = "com.mysql.jdbc.Driver";
-		String userName = "root";
-		String password = "Munni@29041995";
-		Statement stmt = null;
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, userName, password);
-			stmt = conn.createStatement();
 			String query = "insert into Events values( '" + eid + "','" + name + "','" + eventdescription + "'," + Phoneno + ",'" + date + "','" + time + "','" + location + "','" + no + "')";
-			int rs = stmt.executeUpdate(query);
+			Database.update(query);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
