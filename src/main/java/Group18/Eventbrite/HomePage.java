@@ -1,5 +1,6 @@
 package sd;
 
+import Group18.Eventbrite.Database;
 import java.sql.*;
 import java.util.*;
 
@@ -37,19 +38,9 @@ public class HomePage {
 	public static int searchevent() {
 		int count = 0;
 		Scanner sc = new Scanner(System.in);
-		Connection conn = null;
-		String url = "jdbc:mysql://localhost:3306/eventbrite?useSSL=false";
-		String driver = "com.mysql.jdbc.Driver";
-		String userName = "root";
-		String password = "Munni@29041995";
-		Statement stmt = null;
 		String query = "select * from Event";
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, userName, password);
-			stmt = conn.createStatement();
-			// System.out.println("Connected to the database");
-			ResultSet rs = stmt.executeQuery(query);
+			ResultSet rs = Database.query(query);
 			rs.last();
 			count = rs.getRow();
 			System.out.println("Number of rows:" + count);
@@ -62,8 +53,6 @@ public class HomePage {
 			System.out.println("Enter selected event ID:");
 			int selectevent = sc.nextInt();
 			LP.loginpagefunction("Ticket Booking", selectevent);
-
-			conn.close();
 			//System.out.println("Disconnected from database");
 		} catch (Exception e) {
 			e.printStackTrace();

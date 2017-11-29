@@ -1,9 +1,7 @@
 package sd;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import Group18.Eventbrite.Database;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.*;
 
 public class LoginPage {
@@ -12,12 +10,6 @@ public class LoginPage {
 		int noofavailable;
 		String S1 = "NULL";
 		Scanner sc = new Scanner(System.in);
-		Connection conn = null;
-		String url = "jdbc:mysql://localhost:3306/eventbrite?useSSL=false";
-		String driver = "com.mysql.jdbc.Driver";
-		String userName = "root";
-		String password = "Munni@29041995";
-		Statement stmt = null;
 		System.out.println("Enter 1: Already existed User \n 2: New User");
 		int loginselection = sc.nextInt();
 		switch (loginselection) {
@@ -27,16 +19,12 @@ public class LoginPage {
 				System.out.println("Enter Password");
 				String Password1 = sc.next();
 				String query = "select EmailID,Password from LoginUsers where EmailId='" + Username + "' and Password='" + Password1 + "' ";
+				ResultSet rs = Database.query(query);
 				try {
-					Class.forName(driver);
-					conn = DriverManager.getConnection(url, userName, password);
-					stmt = conn.createStatement();
-					// System.out.println("Connected to the database");
-					ResultSet rs = stmt.executeQuery(query);
 					if (rs.next()) {
 						if (choice.equals("Ticket Booking")) {
 							String query1 = "select * from Event where EventID='" + id + "'";
-							ResultSet rs1 = stmt.executeQuery(query1);
+							ResultSet rs1 = Database.query(query1);
 							if (rs1.next()) {
 								noofavailable = Integer.parseInt(rs1.getString("NoofTickets"));
 								if (noofavailable == 0) {
@@ -51,7 +39,8 @@ public class LoginPage {
 											+ "\n Date of the event:" + rs1.getString("DateoftheEvent") + "Booking Confirmation: \n Number of tickets Booked:" + notickets);
 
 									String query2 = "update Event SET NoofTickets='" + noofavailable + "' where EventID='" + id + "'";
-									int rs2 = stmt.executeUpdate(query2);
+									Database.update(query2);
+
 									S1 = "Ticket Booked";
 
 								}
@@ -73,13 +62,12 @@ public class LoginPage {
 							case 1:
 								System.out.println("Enter phone number for validation:");
 								int pno = sc.nextInt();
-								String query3 = "select * from LoginUsers where PhoneNo='" + pno + "'";
-								ResultSet rs3 = stmt.executeQuery(query3);
+								ResultSet rs3 = Database.query("select * from LoginUsers where PhoneNo='" + pno + "'");
 								if (rs3.next()) {
 									System.out.println("Enter New Password:");
 									String pass = sc.next();
 									String query4 = "update LoginUsers SET Password='" + pass + "',ConfirmPassword='" + pass + "' where PhoneNo='" + pno + "'";
-									int rs4 = stmt.executeUpdate(query4);
+									Database.update(query4);
 									S1 = "Password Updated";
 								} else {
 									System.out.println("User not found:");
@@ -104,7 +92,7 @@ public class LoginPage {
 						}
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.err.print(e);
 				}
 				break;
 			case 2:
