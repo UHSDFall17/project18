@@ -4,7 +4,7 @@ import java.util.*;
 
 public class CreateEvent {
 
-	public static void createEvent() {
+	public void createEvent() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Event Id");
 		int eid = sc.nextInt();

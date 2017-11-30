@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class SearchEvent {
 
-	public static int searchEvent() {
+	public int searchEvent() {
 		int count = 0;
 		Scanner sc = new Scanner(System.in);
 		String query = "select * from Event";

@@ -12,19 +12,18 @@ public class HomePage {
 		switch (useroption) {
 			case 1:
 				System.out.println("Corporate user can only create a new events");
-				CLoginPage Lp1 = new CLoginPage();
-				Lp1.corporateloginpage();
+				new CLoginPage().corporateLoginPage();
 				break;
 			case 2:
 				System.out.println("Enter 1 to  Search for an event \n Enter 2 to create an event");
 				int selectoption = in.nextInt();
 				switch (selectoption) {
 					case 1:
-						SearchEvent.searchEvent();
+						new SearchEvent().searchEvent();
 						break;
 
 					case 2:
-						CreateEvent.createEvent();
+						new CreateEvent().createEvent();
 						break;
 					default:
 						System.out.println("Enter correct choice:");

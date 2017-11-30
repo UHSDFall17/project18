@@ -5,7 +5,7 @@ import java.util.*;
 
 public class CLoginPage {
 
-	public static String corporateloginpage() {
+	public String corporateLoginPage() {
 		String S1 = "NULL";
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter 1: Already existed Corporate User \n 2: New Corporate User");
@@ -20,7 +20,7 @@ public class CLoginPage {
 				try {
 					ResultSet rs = Database.query(query);
 					if (rs.next()) {
-						CreateEvent.createEvent();
+						new CreateEvent().createEvent();
 
 					} else {
 						System.out.println("Login failed");
