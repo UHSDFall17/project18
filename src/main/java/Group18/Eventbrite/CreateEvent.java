@@ -1,11 +1,10 @@
 package sd;
 
-import Group18.Eventbrite.Database;
 import java.util.*;
 
 public class CreateEvent {
 
-	public static void createevent() {
+	public static void createEvent() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Event Id");
 		int eid = sc.nextInt();

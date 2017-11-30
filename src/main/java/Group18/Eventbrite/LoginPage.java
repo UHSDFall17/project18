@@ -1,6 +1,5 @@
 package sd;
 
-import Group18.Eventbrite.Database;
 import java.sql.ResultSet;
 import java.util.*;
 

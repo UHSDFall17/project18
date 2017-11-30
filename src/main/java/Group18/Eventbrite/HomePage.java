@@ -1,6 +1,5 @@
 package sd;
 
-import Group18.Eventbrite.Database;
 import java.sql.*;
 import java.util.*;
 
@@ -25,8 +24,7 @@ public class HomePage {
 						break;
 
 					case 2:
-						CreateEvent ce1 = new CreateEvent();
-						ce1.createevent();
+						CreateEvent.createEvent();
 						break;
 					default:
 						System.out.println("Enter correct choice:");

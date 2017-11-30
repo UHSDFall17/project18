@@ -1,6 +1,5 @@
 package sd;
 
-import Group18.Eventbrite.Database;
 import java.util.*;
 
 public class RegistrationPage {

@@ -1,6 +1,5 @@
 package sd;
 
-import Group18.Eventbrite.Database;
 import java.sql.ResultSet;
 import java.util.*;
 
@@ -21,8 +20,7 @@ public class CLoginPage {
 				try {
 					ResultSet rs = Database.query(query);
 					if (rs.next()) {
-						CreateEvent ce = new CreateEvent();
-						ce.createevent();
+						CreateEvent.createEvent();
 
 					} else {
 						System.out.println("Login failed");
