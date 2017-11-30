@@ -26,5 +26,10 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.44</version>
     </dependency>
+    <dependency>
+      <groupId>com.github.junitrunner</groupId>
+      <artifactId>junitrunner-mockito</artifactId>
+      <version>0.0.2</version>
+    </dependency>
   </dependencies>
 </project>
