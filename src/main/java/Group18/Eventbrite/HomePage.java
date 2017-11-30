@@ -20,7 +20,7 @@ public class HomePage {
 				int selectoption = in.nextInt();
 				switch (selectoption) {
 					case 1:
-						searchevent();
+						SearchEvent.searchEvent();
 						break;
 
 					case 2:
@@ -31,30 +31,5 @@ public class HomePage {
 				}
 				break;
 		}
-	}
-
-	public static int searchevent() {
-		int count = 0;
-		Scanner sc = new Scanner(System.in);
-		String query = "select * from Event";
-		try {
-			ResultSet rs = Database.query(query);
-			rs.last();
-			count = rs.getRow();
-			System.out.println("Number of rows:" + count);
-			while (rs.next()) {
-				System.out.println(rs.getString(1));
-				System.out.println(rs.getString(2));
-
-			}
-			LoginPage LP = new LoginPage();
-			System.out.println("Enter selected event ID:");
-			int selectevent = sc.nextInt();
-			LP.loginpagefunction("Ticket Booking", selectevent);
-			//System.out.println("Disconnected from database");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return count;
 	}
 }
